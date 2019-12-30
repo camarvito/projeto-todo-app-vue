@@ -2,7 +2,7 @@
   <div class="task">
       <div class="task__box">
           <div class="task__box--close" @click="destroy"> x </div>
-          <div class="task__box--name"> NOME DA TAREFA </div>
+          <div class="task__box--name"> {{ name }} </div>
       </div>
   </div>
 </template>
@@ -11,9 +11,13 @@
 export default {
     methods: {
         destroy(){
-            this.$el.parentNode.removeChild(this.$el);
+            this.$el.parentNode.removeChild(this.$el); // Funciona de maneira similar bem
             /* O elemento não pode deletar ele mesmo. A solução seria algum evento que alertasse o elemento pai e ele pudesse deletar o elemento filho. */
         }
+    },
+    props: {
+        name: String,
+        done: Boolean
     }
 }
 </script>

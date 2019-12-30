@@ -3,17 +3,14 @@
       <span>Tarefas</span>
       <ProgressBar />
       <AddTask />
-      <TaskGrid />
-        <Task />
-        <Task />
-        <Task />
-      </TaskGrid>
+      <TaskGrid :tasks="tasks" />
   </div>
 </template>
 
 <script>
 import ProgressBar from './components/ProgressBar'
 import AddTask from './components/AddTask'
+import TaskGrid from './components/TaskGrid'
 import Task from './components/Task'
 
 /* A solução que eu vi foi a seguinte, criar uma task grid que tem uma conexão com o data da vue instance e vê os objetos task,
@@ -26,15 +23,21 @@ Ele estava usando muitos emits de evento, como eu pensei.
 
 - A progress bar verifica o total de componentes e quantos componentes estão com estado 'realizado' e faz a média com base nisso.
 - O addTask emite um evento, passando um objeto do tipo task pra tag pai.
+
+- Passamos como param para a TaskGrid a coleção de objetos task.
+
+--> Programar adicionar objeto no array tasks.
 */
 
 export default {
   name: 'app',
-  components: { ProgressBar, AddTask, Task },
-  methods: {
-
+  data() {
+    return {
+      tasks: []
+    }
   },
-
+  methods: {},
+  components: { ProgressBar, AddTask, Task, TaskGrid }
 }
 </script>
 
@@ -52,13 +55,6 @@ export default {
   color: #FFF;
   
   height: 100vh;
-}
-
-.task-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
 }
 
 </style>
