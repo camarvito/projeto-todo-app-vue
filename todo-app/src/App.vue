@@ -1,28 +1,64 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <span>Tarefas</span>
+      <ProgressBar />
+      <AddTask />
+      <TaskGrid />
+        <Task />
+        <Task />
+        <Task />
+      </TaskGrid>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ProgressBar from './components/ProgressBar'
+import AddTask from './components/AddTask'
+import Task from './components/Task'
+
+/* A solução que eu vi foi a seguinte, criar uma task grid que tem uma conexão com o data da vue instance e vê os objetos task,
+e conforme esse array, renderiza os componentes task, em um v-for. 
+
+Ele estava usando muitos emits de evento, como eu pensei.
+
+- Ele passa o nome no objeto.
+- Aparentemente o component task também possui um estado, se a tarefa está ou não feita.
+
+- A progress bar verifica o total de componentes e quantos componentes estão com estado 'realizado' e faz a média com base nisso.
+- O addTask emite um evento, passando um objeto do tipo task pra tag pai.
+*/
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
+  components: { ProgressBar, AddTask, Task },
+  methods: {
+
+  },
+
 }
 </script>
 
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 4rem;
+  background: linear-gradient(to right, #536976, #292E49);
+  color: #FFF;
+  
+  height: 100vh;
 }
+
+.task-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 </style>
