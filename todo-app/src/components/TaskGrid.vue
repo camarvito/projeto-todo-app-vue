@@ -1,6 +1,6 @@
 <template>
     <div class="task-container">
-        <Task v-for="task in tasks" :key="task" :name="task.name"/>
+        <Task v-for="task in tasks" :key="task" :name="task.name" :done="task.done" />
     </div>
 </template>
 

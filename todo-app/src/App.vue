@@ -2,7 +2,7 @@
   <div id="app">
       <span>Tarefas</span>
       <ProgressBar />
-      <AddTask />
+      <AddTask @taskAdded='addTask($event.name, $event.done)'/>
       <TaskGrid :tasks="tasks" />
   </div>
 </template>
@@ -11,7 +11,6 @@
 import ProgressBar from './components/ProgressBar'
 import AddTask from './components/AddTask'
 import TaskGrid from './components/TaskGrid'
-import Task from './components/Task'
 
 /* A solução que eu vi foi a seguinte, criar uma task grid que tem uma conexão com o data da vue instance e vê os objetos task,
 e conforme esse array, renderiza os componentes task, em um v-for. 
@@ -36,8 +35,15 @@ export default {
       tasks: []
     }
   },
-  methods: {},
-  components: { ProgressBar, AddTask, Task, TaskGrid }
+  methods: {
+    addTask(name){
+      const task = {
+        name: name
+      }
+      this.tasks.push(task)
+    }
+  },
+  components: { ProgressBar, AddTask, TaskGrid }
 }
 </script>
 

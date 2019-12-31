@@ -9,13 +9,15 @@
 export default {
     data(){
         return {
-            taskName: ''
+            taskName: '',
+            state: false
         }
     },
     methods: {
         addTask() {
             this.$emit('taskAdded', {
-                name: this.name
+                name: this.taskName,
+                state: false
             })
         }
     }
